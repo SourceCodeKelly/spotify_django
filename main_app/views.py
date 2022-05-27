@@ -10,11 +10,12 @@ from django.views.generic.base import TemplateView
 class Home(TemplateView):
     template_name = 'home.html'
     # Here we are adding a method that will be ran when we are dealing with a GET request
-    def get(self, request):
+    #def get(self, request):
         # Here we are returning a generic response
         # This is similar to response.send() in express
-        return HttpResponse("Spotify Home")
+        #return HttpResponse("Spotify Home")
     
-class About(View):
-    def get(self, request):
-        return HttpResponse('Spotify About')
+class About(TemplateView):
+    template_name = 'about.html'
+    #def get(self, request):
+        #return HttpResponse('Spotify About')
