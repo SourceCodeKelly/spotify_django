@@ -14,6 +14,7 @@
     {% endif %}
     <h1 class="title">{{artist.name}}</h1>
 </div>
+
 <div class="detail__container">
     <div class="buttons">
         <!--Update button-->
@@ -22,7 +23,7 @@
                 <i class="fas fa-edit"></i>
             </span>
         </a>
-        <a href="" class="button is-danger">Delete<br>
+        <a href="{% url 'artist_delete' artist.pk %}" class="button is-danger">Delete<br>
             <span class="icon">
                 <i class="fas fa-trash-alt"></i>
             </span>
@@ -33,5 +34,5 @@
         <p>{{artist.bio}}</p>
     </div>
 </div>
-
+<br>
 {% endblock %}
