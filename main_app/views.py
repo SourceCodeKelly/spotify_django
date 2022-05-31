@@ -4,10 +4,12 @@ from django.http import HttpResponse # <- a class to handle sending a type of re
 #...
 from django.views.generic.base import TemplateView
 from .models import Artist
-# For create route; Import to extend from class::
-from django.views.generic.edit import CreateView
+# For create & update routes; Import to extend from class::
+from django.views.generic.edit import CreateView, UpdateView
 # For showing details:
 from django.views.generic import DetailView
+# For redirecting after Create/Update
+from django.urls import reverse
 
 # Create your views here.
 
@@ -48,7 +50,19 @@ class ArtistCreate(CreateView):
     fields = ['name', 'img', 'bio', 'verified_artist']
     template_name = 'artist_create.html/'
     success_url = '/artists/'
+    # this will get the pk from the route and redirect to artist view
+    def get_success_url(self):
+        return reverse('artist_detail', kwargs={'pk': self.object.pk})
     
 class ArtistDetail(DetailView):
     model = Artist
     template_name = 'artist_detail.html'
+    
+class ArtistUpdate(UpdateView):
+    model = Artist
+    fields = ['name', 'img', 'bio', 'verified_artist']
+    template_name = "artist_update.html"
+    success_url = "/artists/"
+    
+    def get_success_url(self):
+        return reverse('artist_detail', kwargs={'pk': self.object.pk})
