@@ -4,6 +4,8 @@ from django.http import HttpResponse # <- a class to handle sending a type of re
 #...
 from django.views.generic.base import TemplateView
 from .models import Artist
+# For create route; Import to extend from class::
+from django.views.generic.edit import CreateView
 
 # Create your views here.
 
@@ -26,6 +28,21 @@ class ArtistList(TemplateView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['artists'] = Artist.objects.all() # Use the model to query the database
+        # Access query param for search
+        name = self.request.GET.get("name")
+        # Filter by name if query exists
+        if name != None:
+            #.filter is the sql WHERE statement and name__icontains is doing a search for any name with the query param
+            context['artists'] = Artist.objects.filter(name__icontains=name)
+            # Dynamic header
+            context['header'] = f"Searching for {name}" 
+        else:
+            context['artists'] = Artist.objects.all() # Use the model to query the database
+            context['header'] = "Trending Artists"
         return context
 
+class ArtistCreate(CreateView):
+    model = Artist
+    fields = ['name', 'img', 'bio', 'verified_artist']
+    template_name = 'artist_create.html/'
+    success_url = '/artists/'

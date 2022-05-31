@@ -5,7 +5,7 @@
 
 {% block content %}
 
-    <h1 class="title pt-5">Trending Artists</h1>
+    <h1 class="title pt-5">{{header}}</h1>
                                                     <!--Search-->
     <form class='mb-5' method='get'>
         <div class='field has-addons'>
@@ -19,6 +19,7 @@
         </div>
         <!-- Anchor to redirect back to artist list without query param-->
         <a class="button is dark" href="{% url 'artist_list' %}">Clear Search</a>
+        <a class="button is-dark" href="{% url 'artist_create' %}">Add Artist</a>
     </form>
                                                     <!--Gallery-->
     <div class="gallery">
