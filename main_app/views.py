@@ -6,6 +6,8 @@ from django.views.generic.base import TemplateView
 from .models import Artist
 # For create route; Import to extend from class::
 from django.views.generic.edit import CreateView
+# For showing details:
+from django.views.generic import DetailView
 
 # Create your views here.
 
@@ -46,3 +48,7 @@ class ArtistCreate(CreateView):
     fields = ['name', 'img', 'bio', 'verified_artist']
     template_name = 'artist_create.html/'
     success_url = '/artists/'
+    
+class ArtistDetail(DetailView):
+    model = Artist
+    template_name = 'artist_detail.html'

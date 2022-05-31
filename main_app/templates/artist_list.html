@@ -24,7 +24,7 @@
                                                     <!--Gallery-->
     <div class="gallery">
         {% for artist in artists %}
-        <a href="">
+        <a href="{% url 'artist_detail' artist.pk %}">
             <div class="card">
                 <div class="card-image">
                     <figure class="image is-square">
