@@ -19,6 +19,7 @@ h3 {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     justify-content: center;
     gap: 30px;
+    ;
 }
 
 .gallery .card {
